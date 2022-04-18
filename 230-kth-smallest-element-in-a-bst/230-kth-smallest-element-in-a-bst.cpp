@@ -26,7 +26,7 @@ void traverse(vector<int>&inorder, TreeNode * root){
         vector<int> inorder;
         int ans;
         traverse(inorder, root);
-        sort(inorder.begin(), inorder.end());
+        // sort(inorder.begin(), inorder.end());
         ans = inorder[k-1];
         
         return ans;
