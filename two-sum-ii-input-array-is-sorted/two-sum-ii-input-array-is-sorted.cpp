@@ -8,22 +8,14 @@ public:
         while(low<high){
            int mid = low + (high-low)/2;
             
-            if((num[mid]+num[high]) == target){
-                ans.push_back(mid+1);
-                ans.push_back(high+1);
-                return ans;
-            }else if((num[mid]+num[low]) == target){
-                ans.push_back(low+1);
-                ans.push_back(mid+1);
-                return ans;
-            }else if((num[low]+num[high])==target){
-                ans.push_back(low+1);
-                ans.push_back(high+1);
-                return ans;
-            }else if((num[low]+num[high]>target)){
+            if((num[low]+num[high]>target)){
                 high = high-1;
-            }else{
+            }else if((num[low]+num[high])<target){
                 low = low+1;
+            }else{
+                ans.push_back(low+1);
+                ans.push_back(high+1);
+                return ans;
             }
         }
 
