@@ -1,7 +1,7 @@
 class Solution {
 public:
     int searchInsert(vector<int>& nums, int target) {
-        if(nums[nums.size()-1]<target) return nums.size();
+        // if(nums[nums.size()-1]<target) return nums.size();
         int start = 0;
         int end = nums.size()-1;
         
