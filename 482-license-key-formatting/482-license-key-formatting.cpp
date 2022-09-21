@@ -1,27 +1,14 @@
 class Solution {
 public:
-    string licenseKeyFormatting(string s, int k) {
-        stack<char> st;
-        string result;
-        int count = 0;
-        for(auto c: s){
-            if(c!='-'){
-                st.push(toupper(c));
-            }
+    string licenseKeyFormatting(string S, int K) {
+        string res;
+      for (auto i = S.rbegin(); i < S.rend(); i++)
+        if (*i != '-') { // ignore '-' in original string
+          if (res.size()%(K+1) == K) res += '-'; // every (K+1)th char is '-' from tail
+          res += toupper(*i);
         }
         
-        while(!st.empty()){
-            result+=st.top();
-            st.pop();
-            count++;
-            if(count==k && !st.empty()){
-                result+='-';
-                count = 0;
-            }
-        }
-        
-        reverse(result.begin(), result.end());
-        
-        return result;
+      reverse(res.begin(), res.end());
+      return res;
     }
 };
