@@ -1,22 +1,22 @@
 class Solution {
 public:
     string frequencySort(string s) {
-        int n = s.size();
-        unordered_map<char, int> cnt;
-        
-        for(char c:s) cnt[c]+=1;
-        
-        vector<vector<char>> bucket(n+1);
-        
-        for(auto[c,f]:cnt)
-            bucket[f].push_back(c);
-        
-        string ans;
-        
-        for(int freq=n;freq>=1; --freq){
-            for(char c:bucket[freq])
-                ans.append(freq, c);
+       unordered_map<char, int> freqOfChar;
+        for(char c : s) {
+            freqOfChar[c] ++;
         }
-        return ans;
+        
+        map<int, string> dupStr;
+        for(auto v : freqOfChar) {
+            char c = v.first;
+            int n = v.second;
+            dupStr[n] += string(n, c);
+        }
+        
+        string res;
+        for(auto rit = dupStr.rbegin(); rit != dupStr.rend(); ++rit) {
+            res += rit->second;
+        }
+        return res;
     }
 };
