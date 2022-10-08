@@ -1,7 +1,7 @@
 class Solution {
 public:
-    int threeSumClosest(vector<int>& arr, int target) {
-         vector<int> nums(arr.begin(), arr.end());
+    int threeSumClosest(vector<int>& nums, int target) {
+         // vector<int> nums(arr.begin(), arr.end());
         
 
          sort(nums.begin(), nums.end());
