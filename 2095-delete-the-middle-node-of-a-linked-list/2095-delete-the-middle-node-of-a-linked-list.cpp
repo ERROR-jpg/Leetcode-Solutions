@@ -31,7 +31,7 @@ public:
         }
         ListNode *del = temp->next;
         temp->next = del->next;
-        // free(del);
+        delete(del);
         return head;
     }
 };
