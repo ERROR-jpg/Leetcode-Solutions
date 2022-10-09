@@ -12,45 +12,20 @@
 class Solution {
 public:
     
-    void tovector(TreeNode* node, vector<int>& nums)
-{
-        
-    if (node == NULL)
-        return;
- 
-    /* first recur on left child */
-    tovector(node->left, nums);
- 
-    /* then print the data of node */
-    nums.push_back(node->val);
- 
-    /* now recur on right child */
-   tovector(node->right, nums);
-        
-        
-}
- 
-    
-    bool findTarget(TreeNode* root, int target) {
+    bool findTarget(TreeNode* root, int k) {
         vector<int> nums;
-         tovector(root, nums);
-        
-        
-        
-         map<int,int> prev;
-        int n=nums.size();
-        
-        for(int i=0;i<n;i++)
-        {
-            int diff=target-nums[i];
-            
-            if(prev.find(diff)!=prev.end())
-                return true;
-            
-            prev[nums[i]]=i;
+        inorder(root, nums);
+        for(int i = 0, j = nums.size()-1; i<j;){
+            if(nums[i] + nums[j] == k)return true;
+            (nums[i] + nums[j] < k)? i++ : j--;
         }
-        
         return false;
-        
+    }
+    
+    void inorder(TreeNode* root, vector<int>& nums){
+        if(root == NULL)return;
+        inorder(root->left, nums);
+        nums.push_back(root->val);
+        inorder(root->right, nums);
     }
 };
