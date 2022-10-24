@@ -1,26 +1,20 @@
 class Solution {
 public:
-    void helper(int ind, vector<int>&ds, vector<int>&arr, int n, vector<vector<int>>&ans){
-        if(ind==n){
-            ans.push_back(ds);
-            return;
+    void findsubsets(int ind, vector<int>&nums, vector<vector<int>>&ans, vector<int>&ds){
+        ans.push_back(ds);
         
+        for(int i=ind; i<nums.size();i++){
+            if(i!=ind&& nums[i]==nums[i-1])continue;
+            ds.push_back(nums[i]);
+            findsubsets(i+1, nums, ans, ds);
+            ds.pop_back();
         }
-        
-        ds.push_back(arr[ind]);
-        helper(ind+1, ds, arr, n, ans);
-        
-        ds.pop_back();
-        helper(ind+1, ds, arr, n, ans);
-   
     }
     
     vector<vector<int>> subsets(vector<int>& nums) {
-        vector<int> ds;
-        int n = nums.size();
         vector<vector<int>> ans;
-        helper(0, ds, nums, n, ans);
-     
+        vector<int> ds;
+        findsubsets(0, nums, ans, ds);
         return ans;
     }
 };
