@@ -1,12 +1,28 @@
 class Solution {
 public:
     vector<int> frequencySort(vector<int>& nums) {
-        unordered_map<int,int> umap;
-        for(auto x:nums){
-            umap[x]++;
+        vector<int> ans;
+        priority_queue<pair<int, int>> maxh;
+        unordered_map<int, int> mp;
+        
+        for(auto i : nums){
+            mp[i]++;
         }
         
-        sort(nums.begin(), nums.end(), [&](int a, int b) {return umap[a]!=umap[b]? umap[a]<umap[b]: a>b ;});
-        return nums;
+        for(auto it : mp){
+            maxh.push({-1 * it.second, it.first});
+        }
+        
+        while(!maxh.empty()){
+            int freq = -1 * maxh.top().first;
+            int ele = maxh.top().second;
+            
+            for(int i =0; i<freq; i++){
+                ans.push_back(ele);
+            }
+            maxh.pop();
+        }
+        
+        return ans;
     }
 };
