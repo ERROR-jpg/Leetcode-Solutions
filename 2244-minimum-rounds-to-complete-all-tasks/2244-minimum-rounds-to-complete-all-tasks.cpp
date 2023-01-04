@@ -13,7 +13,6 @@ public:
             if(count == 1){
                 return -1;
             }
-            
             if(count%3==0){
                 minm += count/3;
             }else{
