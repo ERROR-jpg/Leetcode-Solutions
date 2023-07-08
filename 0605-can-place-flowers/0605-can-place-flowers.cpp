@@ -1,21 +1,22 @@
 class Solution {
 public:
     bool canPlaceFlowers(vector<int>& flowerbed, int n) {
-        int count = 0;
-        for (int i = 0; i < flowerbed.size(); i++) {
-            // Check if the current plot is empty.
-            if (flowerbed[i] == 0) {
-                // Check if the left and right plots are empty.
-                bool emptyLeftPlot = (i == 0) || (flowerbed[i - 1] == 0);
-                bool emptyRightPlot = (i == flowerbed.size() - 1) || (flowerbed[i + 1] == 0);
-                
-                // If both plots are empty, we can plant a flower here.
-                if (emptyLeftPlot && emptyRightPlot) {
-                    flowerbed[i] = 1;
-                    count++;
-                }
+        if(n ==0)
+            return true;
+        
+        flowerbed.insert(flowerbed.begin(), 0);
+        flowerbed.push_back(0);
+        
+        
+        for(int i=1; i<flowerbed.size()-1; i++){
+            if(flowerbed[i-1]==0 && flowerbed[i]==0 && flowerbed[i+1]==0){
+                flowerbed[i]=1;
+                n--;
+            }
+            if(n==0){
+                return true;
             }
         }
-        return count >= n;
+        return false;
     }
 };
