@@ -1,28 +1,32 @@
 class Solution {
 public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
-        map<int, int> m1;
-        stack<int> st;
-        int n = nums2.size();
-        
-        for(int i =n-1; i>=0; i--){
-            while(!st.empty()&&st.top()<nums2[i]){
-                st.pop();
-            }
-            if(st.empty()){
-                m1[nums2[i]]=-1;
-            }
-            else{
-                m1[nums2[i]]=st.top();
-            }            
-            st.push(nums2[i]);
+        // O (n + m)
+        map<int, int> nums1Idx; {
+            int idx = 0;
+            for(int n: nums1)
+                nums1Idx[n] = idx++;
         }
-        vector<int>ans;
+        vector<int> res;
+        for(int i = 0; i < nums1.size(); i++)
+            res.push_back(-1);
         
-        for(auto i:nums1){
-            ans.push_back(m1[i]);
+        stack<int> stack;
+        for(int i = 0; i < nums2.size(); i++) {
+            int cur = nums2[i];
+            
+            // while stack has elements and current is greater than the top of the stack
+            while(stack.size() && cur > stack.top()) {
+                int val = stack.top(); // take top val
+                stack.pop();
+                int idx = nums1Idx[val];
+                res[idx] = cur;
+            }
+            
+            if(nums1Idx.count(cur))
+                stack.push(cur);
         }
         
-        return ans;
+        return res;
     }
 };
