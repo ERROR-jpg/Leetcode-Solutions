@@ -1,17 +1,18 @@
 class Solution {
 public:
-    bool wordPattern(string pattern, string s) {
-        unordered_map<char, int> p2i;
-        unordered_map<string, int> w2i;
+    bool wordPattern(string pattern, string str) {
+      vector<int> pat_map(26, 0);
+        unordered_map<string, int> str_map;
+        int i=0, n=pattern.size();
+        istringstream ss (str);
+        string token;
         
-        istringstream in(s); string word;
-        int i =0, n =pattern.size();
-        
-        for(word; in>>word; i++){
-            if(i==n || p2i[pattern[i]]!=w2i[word]) return false;
-            p2i[pattern[i]] = w2i[word] = i+1;
+        for(string token; ss >> token; i++){
+            if(i==n || pat_map[pattern[i]-'a'] != str_map[token]) return false;
+            
+            pat_map[pattern[i]-'a'] = str_map[token] = i+1;
         }
         
-        return i==n;
+        return i == n;
     }
 };
